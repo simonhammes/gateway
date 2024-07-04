@@ -1,0 +1,20 @@
+_format_version: "2.1"
+_transform: true
+
+services:
+  - name: whoami
+    url: http://whoami:80
+    routes:
+      - name: root
+        paths:
+          - /
+
+plugins:
+  # https://docs.konghq.com/hub/kong-inc/rate-limiting/how-to/basic-example/
+  - name: rate-limiting
+    service: whoami
+    config:
+      minute: 10
+      policy: redis
+      redis:
+        host: redis

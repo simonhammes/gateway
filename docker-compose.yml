@@ -1,0 +1,19 @@
+services:
+  gateway:
+    image: kong:3.7
+    command: ["kong", "start", "-c", "/etc/kong/kong.yml"]
+    environment:
+      KONG_DATABASE: off
+      KONG_DECLARATIVE_CONFIG: /etc/kong/kong.yml
+      KONG_PROXY_ACCESS_LOG: /dev/null
+      KONG_ADMIN_ACCESS_LOG: /dev/null
+      KONG_PROXY_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_ERROR_LOG: /dev/stderr
+    volumes:
+      - ./config/kong.yml:/etc/kong/kong.yml
+    ports:
+      - "3000:8000"
+  redis:
+    image: redis:7.2.5
+  whoami:
+    image: traefik/whoami
