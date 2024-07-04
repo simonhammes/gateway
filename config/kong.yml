@@ -3,11 +3,27 @@ _transform: true
 
 services:
   - name: whoami
-    url: http://whoami:80
+    url: http://whoami-1:80
     routes:
       - name: root
         paths:
           - /
+  - name: balance
+    host: balance.upstream
+    routes:
+      - name: balance
+        paths:
+          - /balance
+
+upstreams:
+  - algorithm: round-robin
+    name: balance.upstream
+
+targets:
+  - target: whoami-1:80
+    upstream: balance.upstream
+  - target: whoami-2:80
+    upstream: balance.upstream
 
 plugins:
   # https://docs.konghq.com/hub/kong-inc/rate-limiting/how-to/basic-example/
