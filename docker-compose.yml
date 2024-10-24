@@ -14,10 +14,10 @@ services:
     ports:
       - "3000:8000"
   redis:
-    image: redis:7.2.5
+    image: redis:7.4.1
   whoami-1:
-    image: traefik/whoami
+    image: traefik/whoami:v1.10
   whoami-2:
-    image: traefik/whoami
+    image: traefik/whoami:v1.10
   whoami-3:
-    image: traefik/whoami
+    image: traefik/whoami:v1.10
