@@ -1,6 +1,6 @@
 services:
   gateway:
-    image: kong:3.7
+    image: kong:3.8.0
     command: ["kong", "start", "-c", "/etc/kong/kong.yml"]
     environment:
       KONG_DATABASE: off
